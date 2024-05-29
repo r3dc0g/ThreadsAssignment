@@ -13,19 +13,30 @@
 #include <pthread.h>
 #include <time.h>
 
+// Function to write random numbers to a file Data.txt
 void write_random_numbers() {
+
     FILE *file = fopen("Data.txt", "w");
+
     for (int i = 0; i < 1000000; i++) {
         fprintf(file, "%d\n", rand() % 101);
     }
+
     fclose(file);
+
 }
 
+// Function to calculate the average of the numbers
+// in the Data.txt file for Thread A
 void *operation_a() {
+
+    clock_t start = clock();
     int sum = 0;
     int count = 0;
+
     FILE *dataA = fopen("Data_Thread_A.txt", "w");
     FILE *data = fopen("Data.txt", "r");
+
     while (!feof(data)) {
         char buffer[255];
         fgets(buffer, 255, (FILE*)data);
@@ -36,16 +47,29 @@ void *operation_a() {
     }
 
     double average = (double) sum / count;
-    printf("%f\n", average);
+
+    clock_t end = clock();
+
+    double time = (double) (end - start) / CLOCKS_PER_SEC * 1000;
+
+    printf("Thread A found an average of %.2f in %.2f milliseconds\n", average, time);
+
     fclose(dataA);
+
     return NULL;
 }
 
+// Function to calculate the average of the numbers
+// in the Data.txt file for Thread B
 void *operation_b() {
+
+    clock_t start = clock();
     int sum = 0;
     int count = 0;
+
     FILE *dataB = fopen("Data_Thread_B.txt", "w");
     FILE *data = fopen("Data.txt", "r");
+
     while (!feof(data)) {
         char buffer[255];
         fgets(buffer, 255, (FILE*)data);
@@ -56,16 +80,29 @@ void *operation_b() {
     }
 
     double average = (double) sum / count;
-    printf("%f\n", average);
+
+    clock_t end = clock();
+
+    double time = (double) (end - start) / CLOCKS_PER_SEC * 1000;
+
+    printf("Thread B found an average of %.2f in %.2f milliseconds\n", average, time);
+
     fclose(dataB);
+
     return NULL;
 }
 
+// Function to calculate the average of the numbers
+// in the Data.txt file for Thread C
 void *operation_c() {
+
+    clock_t start = clock();
     int sum = 0;
     int count = 0;
+
     FILE *dataC = fopen("Data_Thread_C.txt", "w");
     FILE *data = fopen("Data.txt", "r");
+
     while (!feof(data)) {
         char buffer[255];
         fgets(buffer, 255, data);
@@ -76,8 +113,15 @@ void *operation_c() {
     }
 
     double average = (double) sum / count;
-    printf("%f\n", average);
+
+    clock_t end = clock();
+
+    double time = (double) (end - start) / CLOCKS_PER_SEC * 1000;
+
+    printf("Thread C found an average of %.2f in %.2f milliseconds\n", average, time);
+
     fclose(dataC);
+
     return NULL;
 }
 
@@ -98,7 +142,7 @@ int main(int argc, char *argv[]) {
 
     clock_t end = clock();
 
-    double time = (double) (end - start) / CLOCKS_PER_SEC;
-    printf("This operation took %f seconds\n", time);
+    double time = (double) (end - start) / CLOCKS_PER_SEC * 1000;
+    printf("This operation took %.2f milliseconds\n", time);
 }
 
