@@ -21,16 +21,30 @@ void write_random_numbers() {
 }
 
 void *operation_a() {
+    FILE *dataA = fopen("Data_Thread_A.txt", "w");
 
+
+
+    fclose(dataA);
     return NULL;
 }
 
 void *operation_b() {
+    FILE *dataB = fopen("Data_Thread_B.txt", "w");
+
+
+
+    fclose(dataB);
 
     return NULL;
 }
 
 void *operation_c() {
+    FILE *dataC = fopen("Data_Thread_B.txt", "w");
+
+
+
+    fclose(dataC);
 
     return NULL;
 }
