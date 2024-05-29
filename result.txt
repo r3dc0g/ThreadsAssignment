@@ -1,4 +1,0 @@
-Thread A found an average of 50.00 in 254.66 milliseconds.
-Thread B found an average of 50.00 in 262.35 milliseconds.
-Thread C found an average of 50.00 in 264.57 milliseconds.
-This whole operation took 265.31 milliseconds.
