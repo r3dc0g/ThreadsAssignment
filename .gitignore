@@ -1,3 +1,10 @@
+# project generated files
+Data.txt
+Data_Thread_A.txt
+Data_Thread_B.txt
+Data_Thread_C.txt
+result.txt
+
 # Prerequisites
 *.d
 
