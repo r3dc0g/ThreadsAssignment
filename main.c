@@ -15,12 +15,30 @@
 void write_random_numbers() {
     FILE *file = fopen("Data.txt", "w");
     for (int i = 0; i < 1000000; i++) {
-        fprintf(file, "%d\n", rand() % 100);
+        fprintf(file, "%d\n", rand() % 101);
     }
     fclose(file);
 }
 
+void *operation_a() {
+
+    return NULL;
+}
+
+void *operation_b() {
+
+    return NULL;
+}
+
+void *operation_c() {
+
+    return NULL;
+}
+
 int main(int argc, char *argv[]) {
+    write_random_numbers();
+
+    pthread_t thread1, thread2, thread3;
 
 }
 
