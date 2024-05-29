@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
+#include <time.h>
 
 void write_random_numbers() {
     FILE *file = fopen("Data.txt", "w");
@@ -21,31 +22,62 @@ void write_random_numbers() {
 }
 
 void *operation_a() {
+    int sum = 0;
+    int count = 0;
     FILE *dataA = fopen("Data_Thread_A.txt", "w");
+    FILE *data = fopen("Data.txt", "r");
+    while (!feof(data)) {
+        char buffer[255];
+        fgets(buffer, 255, (FILE*)data);
+        int number = atoi(buffer);
+        fputs(buffer, (FILE*)dataA);
+        sum += number;
+        count++;
+    }
 
-
-
+    double average = (double) sum / count;
+    printf("%f\n", average);
     fclose(dataA);
     return NULL;
 }
 
 void *operation_b() {
+    int sum = 0;
+    int count = 0;
     FILE *dataB = fopen("Data_Thread_B.txt", "w");
+    FILE *data = fopen("Data.txt", "r");
+    while (!feof(data)) {
+        char buffer[255];
+        fgets(buffer, 255, (FILE*)data);
+        int number = atoi(buffer);
+        fputs(buffer, (FILE*)dataB);
+        sum += number;
+        count++;
+    }
 
-
-
+    double average = (double) sum / count;
+    printf("%f\n", average);
     fclose(dataB);
-
     return NULL;
 }
 
 void *operation_c() {
-    FILE *dataC = fopen("Data_Thread_B.txt", "w");
+    int sum = 0;
+    int count = 0;
+    FILE *dataC = fopen("Data_Thread_C.txt", "w");
+    FILE *data = fopen("Data.txt", "r");
+    while (!feof(data)) {
+        char buffer[255];
+        fgets(buffer, 255, data);
+        int number = atoi(buffer);
+        fputs(buffer, dataC);
+        sum += number;
+        count++;
+    }
 
-
-
+    double average = (double) sum / count;
+    printf("%f\n", average);
     fclose(dataC);
-
     return NULL;
 }
 
@@ -54,5 +86,19 @@ int main(int argc, char *argv[]) {
 
     pthread_t thread1, thread2, thread3;
 
+    clock_t start = clock();
+
+    pthread_create(&thread1, NULL, operation_a, NULL);
+    pthread_create(&thread2, NULL, operation_b, NULL);
+    pthread_create(&thread3, NULL, operation_c, NULL);
+
+    pthread_join(thread1, NULL);
+    pthread_join(thread2, NULL);
+    pthread_join(thread3, NULL);
+
+    clock_t end = clock();
+
+    double time = (double) (end - start) / CLOCKS_PER_SEC;
+    printf("This operation took %f seconds\n", time);
 }
 
