@@ -1,12 +1,50 @@
-// This Assignment is about using POSIX threads.
-// This program first writes 1,000,000 random numbers to a file called Data.txt
-// Then it creates 3 threads.
-// Create a file named Data_Thread_X.txt, where X is the letter A, B, or C, depending on which thread created the file.
-// Each thread copies the data from the Data.txt file to its Data_Thread_X.txt file.
-// While copying the data, calculate the average of the numbers in the Data.txt file to two places past the decimal point (e.g., 50.00) and output the average just before the thread finishes. Make sure this works on files of any size.
-// Close the Data.txt file and the Data_Thread_X.txt files.
-// Compute each thread’s execution time and output it in milliseconds (ms).
-// The main thread should wait for the thread tasks to finish. The main thread should also compute the total “wall clock” execution time (ms) of the program execution (including all three thread tasks) and output the result.
+// =================================================
+//
+//    Name:         Garrett Crites
+//    Course:       CSC 3350
+//    Assignment:   Threads Assignment
+//    Professor:    Dr. Andy Cameron
+//    Date:         5/29/2024
+//
+// =================================================
+//
+//    Compile:      gcc main.c -o theads
+//
+// =================================================
+//
+//    1. This Assignment is about using POSIX threads.
+//
+//    2. This program first writes 1,000,000 random
+//       numbers to a file called Data.txt
+//
+//    3. Then it creates 3 threads.
+//
+//    4. Create a file named Data_Thread_X.txt, where
+//       X is the letter A, B, or C, depending on which
+//       thread created the file.
+//
+//    5. Each thread copies the data from the Data.txt
+//       file to its Data_Thread_X.txt file.
+//
+//    6. While copying the data, calculate the average of
+//       the numbers in the Data.txt file to two places
+//       past the decimal point (e.g., 50.00) and output
+//       the average just before the thread finishes. Make
+//       sure this works on files of any size.
+//
+//    7. Close the Data.txt file and the Data_Thread_X.txt
+//       files.
+//
+//    8. Compute each thread’s execution time and output
+//       it in milliseconds (ms).
+//
+//    9. The main thread should wait for the thread tasks
+//       to finish. The main thread should also compute
+//       the total “wall clock” execution time (ms) of the
+//       program execution (including all three thread
+//       tasks) and output the result.
+//
+// =================================================
 
 #include <stdio.h>
 #include <stdlib.h>
